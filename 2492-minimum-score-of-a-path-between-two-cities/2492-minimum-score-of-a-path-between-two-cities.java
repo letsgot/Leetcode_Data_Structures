@@ -1,18 +1,32 @@
 class Solution {
-   int[] dsu;
-public int minScore(int n, int[][] roads) {
-    dsu = new int[n+1];
-    int[] ans = new int[n+1];
-    for(int i = 0; i <= n; i++) dsu[i] = i;
-    Arrays.fill(ans, Integer.MAX_VALUE);
-    for(int[] r : roads){
-        int a = find(r[0]), b = find(r[1]);
-        dsu[a] = dsu[b];
-        ans[a] = ans[b] = Math.min(r[2],Math.min(ans[a],ans[b]));
+    int par[];
+    public int minScore(int n, int[][] roads) {
+        int arr[] = new int[n+1];
+        par =  new int[n+1];
+        for(int i = 0; i <= n; i++) par[i] = i;
+        Arrays.fill(arr, Integer.MAX_VALUE);
+        for(int[]road : roads){
+            int a = road[0];
+            int b = road[1];
+            int d = road[2];
+            
+            int pa = find(a);
+            int pb = find(b);
+            
+            par[pa] = par[pb];
+            arr[pa] = arr[pb] = Math.min(d,Math.min(arr[pa],arr[pb]));
+        }
+        
+        return arr[find(par[1])];
     }
-    return ans[find(1)];
-}
-int find(int i){
-    return dsu[i]==i ? i : (dsu[i] = find(dsu[i]));
-}
+    
+    public int find(int x){
+        if(x==par[x]){
+            return x;
+        }
+        else{
+            par[x] = find(par[x]);
+            return par[x];
+        }
+    }
 }
