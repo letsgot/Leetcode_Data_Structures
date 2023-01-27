@@ -1,45 +1,58 @@
 class Solution {
-  public List<String> findAllConcatenatedWordsInADict(String[] words) {
-    Trie root = new Trie();
-    for(int i = 0; i < words.length; i++) {
-        if( words[i].length() > 0 )
-            buildTrie(root, words[i]);
+    public class Node{
+        boolean eow;
+        Node[]children;
+        Node(){
+            children = new Node[26];
+        }
     }
-
-    List<String> resultList = new ArrayList<String>();
-    for(int i = 0; i < words.length; i++)
-        if( search(root, words[i], 0, 0) )
-            resultList.add(words[i]);
-    return resultList;
-}
-
-public void buildTrie(Trie root, String word) {
-    Trie current = root;
-    for(int i = 0; i < word.length(); i++) {
-        int index = word.charAt(i) - 'a';
-        if( current.array[index] == null )
-            current.array[index] = new Trie();
-        current = current.array[index];
+    
+    public List<String> findAllConcatenatedWordsInADict(String[] words) {
+        Node root = new Node();
+        
+        for(String word : words){
+            if(word.length()<=0){
+                continue;
+            }
+            Node t = root;
+            for(int i=0;i<word.length();i++){
+                char ch = word.charAt(i);
+                if(t.children[ch-'a']==null){
+                    t.children[ch-'a'] = new Node();
+                }
+                t = t.children[ch-'a'];
+            }
+            t.eow = true;
+        }
+        
+        List<String> list = new ArrayList<>();
+        for(String word : words){
+            boolean hans = helper(root,word,0,0);
+            // System.out.println(word + "  " + hans);
+            if(hans){
+                list.add(word);
+            }
+        }
+        
+        return list;
     }
-    current.isWord = true;
-}
-
-// num represent the number of words that current word can be comprised of
-public boolean search(Trie root, String word, int begin, int num) {
-    Trie current = root;
-    for(int i = begin; i < word.length(); i++) {
-        int index = word.charAt(i) - 'a';
-        if( current.array[index] == null )
-            return false;
-        current = current.array[index];
-        if( current.isWord && search(root, word, i + 1, num + 1) ) 
-            return true;
+    
+    public boolean helper(Node root,String str,int idx,int count){
+        
+        Node t = root;
+        
+        for(int i=idx;i<str.length();i++){
+            char ch = str.charAt(i);
+            if(t.children[ch-'a']==null){
+                return false;
+            }
+            t = t.children[ch-'a'];
+            if(t.eow==true&&helper(root,str,i+1,count+1)){
+                    return true;
+            }
+        }
+        
+        return t.eow&&count>=1;
+        
     }
-    return num >= 1 && current.isWord;
-}
-
-class Trie {
-    Trie array[] = new Trie[26];
-    boolean isWord = false;
-}
 }
