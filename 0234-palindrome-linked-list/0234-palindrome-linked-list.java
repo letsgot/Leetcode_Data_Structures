@@ -9,38 +9,51 @@
  * }
  */
 class Solution {
-    
-    ListNode head;
-    int size = 0;
-    boolean check = true;
-    public boolean isPalindrome(ListNode node) {
-        head = node;
-        size = siz(node);
-        fold(1,node);
-        return check;
-    }
-    
-    public void fold(int sz,ListNode tail){
-        if(tail==null){
-            return;
+    public boolean isPalindrome(ListNode head) {
+        if(head==null||head.next==null){
+            return true;
         }
-        fold(sz+1,tail.next);
         
-        if(sz>size/2){
-            if(head.val!=tail.val){
-                check = false;
+        ListNode mid = middleNode(head);
+        
+        ListNode right = reverse(mid);
+        
+        while(right!=null&&head!=mid){
+            if(right.val!=head.val){
+                return false;
             }
+            right = right.next;
             head = head.next;
         }
-        
+        return true;
     }
     
-    public int siz(ListNode n){
-        int s =0;
-        while(n!=null){
-            s++;
-            n = n.next;
+    public ListNode middleNode(ListNode head) {
+        if(head==null||head.next==null) return head;
+        
+        ListNode fast = head;
+        ListNode slow = head;
+        
+        while(fast!=null&&fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
         }
-        return s;
+        
+        return slow;
+    }
+    
+    public ListNode reverse(ListNode head){
+        if(head==null||head.next==null)return head;
+        ListNode curr = head;
+        ListNode prev = null;
+        
+        while(curr!=null){
+            ListNode n = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = n;
+        }
+        
+        return prev;
     }
 }
