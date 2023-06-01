@@ -32,7 +32,7 @@ class Solution {
             int c = rem.c;
             int d = rem.d;
             
-            System.out.println(r + " " +c);
+            // System.out.println(r + " " +c);
             
             if(vis[r][c]==true){
                 continue;
@@ -61,7 +61,7 @@ class Solution {
             return;
         }
         
-        System.out.println(r + " " + c);
+        // System.out.println(r + " " + c);
         
         que.add(new Pair(r,c,d));
     }
