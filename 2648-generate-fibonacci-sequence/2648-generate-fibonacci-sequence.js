@@ -13,6 +13,8 @@ var fibGenerator = function*() {
         a = b;
         b = c;
     }
+    
+    return a;
 };
 
 /**
