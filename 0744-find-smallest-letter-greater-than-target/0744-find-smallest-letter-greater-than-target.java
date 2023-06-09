@@ -1,6 +1,6 @@
 class Solution {
     public char nextGreatestLetter(char[] a, char x) {
-         int n = a.length;
+        int n = a.length;
        
         if (x >= a[n - 1])   x = a[0];
         else    x++;
