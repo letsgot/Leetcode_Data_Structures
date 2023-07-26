@@ -6,9 +6,10 @@ class Solution {
         for(int i=0;i<nums.length;i++){
             int val = nums[i];
             sum += val;
+            int c = sum - k;
             
-            if(map.containsKey(sum-k)){
-                count += map.get(sum-k);
+            if(map.containsKey(c)){
+                count += map.get(c);
             }
             
             map.put(sum,map.getOrDefault(sum,0)+1);
