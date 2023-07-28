@@ -6,7 +6,7 @@ class Solution {
         dp[n] = 0;
         
         for(int i=n-1;i>=0;i--){
-                       int max = 0;
+            int max = 0;
             int best = 0;
             for(int j=0;j<k&&i+j+1<n+1;j++){
                 max = Math.max(max,arr[i+j]);
