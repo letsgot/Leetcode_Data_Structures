@@ -43,32 +43,12 @@ class Solution
     static int longestSubsequence(int size, int nums[])
     {
         // code here
-        // int dp[] = new int[size];
-        // int len = 1;
-        // dp[0] = nums[0];
-        
-        // for(int i=1;i<size;i++){
-        //     if(dp[len-1]<nums[i]){
-        //         len++;
-        //         dp[len-1] = nums[i];
-        //     }
-        //     else{
-        //         int idx = Arrays.binarySearch(nums,0,len-1,nums[i]);
-        //         if(idx<0){
-        //             idx *= -1;
-        //             idx--;
-        //         }
-                
-        //         dp[idx] = nums[i];
-        //     }
-        // }
-        
-        // return len;
-         int dp[] = new int[nums.length];
-        
-        dp[0] = nums[0];
+        size = nums.length;
+        int dp[] = new int[size];
         int len = 1;
-        for(int i=1;i<nums.length;i++){
+        dp[0] = nums[0];
+        
+        for(int i=1;i<size;i++){
             if(dp[len-1]<nums[i]){
                 len++;
                 dp[len-1] = nums[i];
@@ -76,7 +56,7 @@ class Solution
             else{
                 int idx = Arrays.binarySearch(dp,0,len-1,nums[i]);
                 if(idx<0){
-                    idx = idx * -1;
+                    idx *= -1;
                     idx--;
                 }
                 
@@ -85,5 +65,26 @@ class Solution
         }
         
         return len;
+        //  int dp[] = new int[nums.length];
+        
+        // dp[0] = nums[0];
+        // int len = 1;
+        // for(int i=1;i<nums.length;i++){
+        //     if(dp[len-1]<nums[i]){
+        //         len++;
+        //         dp[len-1] = nums[i];
+        //     }
+        //     else{
+        //         int idx = Arrays.binarySearch(dp,0,len-1,nums[i]);
+        //         if(idx<0){
+        //             idx = idx * -1;
+        //             idx--;
+        //         }
+                
+        //         dp[idx] = nums[i];
+        //     }
+        // }
+        
+        // return len;
     }
 } 
