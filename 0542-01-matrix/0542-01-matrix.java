@@ -1,59 +1,53 @@
 class Solution {
-    public class Pair{
-        int x;
-        int y;
-        int dis;
-        Pair(int x,int y,int dis){
-            this.x = x;
-            this.y = y;
-            this.dis = dis;
-        }
-    }
-    
-    public int[][] updateMatrix(int[][] mat) {
+   public int[][] updateMatrix(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+        int[][] dp = new int[m][n];
         
-        Queue<Pair> que = new ArrayDeque<>();
-        for(int i=0;i<mat.length;i++){
-            for(int j=0;j<mat[0].length;j++){
-                if(mat[i][j]==0){
-                    que.add(new Pair(i,j,0));
+        for (int row = 0; row < m; row++) {
+            for (int col = 0; col < n; col++) {
+                dp[row][col] = mat[row][col];
+            }
+        } 
+
+        for (int row = 0; row < m; row++) {
+            for (int col = 0; col < n; col++) {
+                if (dp[row][col] == 0) {
+                    continue;
                 }
+
+                int minNeighbor = m * n;
+                if (row > 0) {
+                    minNeighbor = Math.min(minNeighbor, dp[row - 1][col]);
+                }
+                
+                if (col > 0) {
+                    minNeighbor = Math.min(minNeighbor, dp[row][col - 1]);
+                }
+                
+                dp[row][col] = minNeighbor + 1;
             }
         }
         
-        int ans[][] = new int[mat.length][mat[0].length];
-        boolean [][] vis = new boolean[ans.length][ans[0].length];
-        while(que.size()!=0){
-            int sz = que.size();
-            for(int i=0;i<sz;i++){
-                Pair rem = que.remove();
-                int x = rem.x;
-                int y = rem.y;
-                int d = rem.dis;
-                
-                if(vis[x][y]){
+        for (int row = m - 1; row >= 0; row--) {
+            for (int col = n - 1; col >= 0; col--) {
+                if (dp[row][col] == 0) {
                     continue;
                 }
                 
-                vis[x][y] = true;
+                int minNeighbor = m * n;
+                if (row < m - 1) {
+                    minNeighbor = Math.min(minNeighbor, dp[row + 1][col]);
+                }
                 
-                ans[x][y] = d;
+                if (col < n - 1) {
+                    minNeighbor = Math.min(minNeighbor, dp[row][col + 1]);
+                }
                 
-                add(que,vis,x+1,y,d+1);
-                add(que,vis,x-1,y,d+1);
-                add(que,vis,x,y+1,d+1);
-                add(que,vis,x,y-1,d+1);
+                dp[row][col] = Math.min(dp[row][col], minNeighbor + 1);
             }
         }
         
-        return ans;
-    }
-    
-    public void add(Queue<Pair> que,boolean[][]vis,int x,int y,int d){
-        if(x<0||y<0||x>=vis.length||y>=vis[0].length||vis[x][y]){
-            return;
-        }
-        
-        que.add(new Pair(x,y,d));
+        return dp;
     }
 }
