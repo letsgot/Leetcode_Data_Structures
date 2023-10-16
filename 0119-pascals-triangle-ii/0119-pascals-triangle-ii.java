@@ -1,13 +1,34 @@
 class Solution {
     public List<Integer> getRow(int rowIndex) {
-         List<Integer> row = new ArrayList<>(rowIndex + 1);  
-        // Calculate each element of the row based on the previous row
-        for (int i = 0; i <= rowIndex; ++i) {
-            row.add(1);
-            for (int j = i - 1; j > 0; --j) {
-                row.set(j, row.get(j) + row.get(j - 1));
-            }
+        if(rowIndex==0){
+            ArrayList<Integer> ans = new ArrayList<>();
+            ans.add(1);
+            return ans;
         }
-        return row;
+        ArrayList<Integer> ans = new ArrayList<>();
+        ArrayList<Integer> helper = new ArrayList<>();
+        for(int i=1;i<=rowIndex;i++){
+            if(i==1){
+                ans.add(1);
+                ans.add(1);
+                continue;
+            }
+            
+            helper.add(1);
+            
+            for(int j=1;j<ans.size();j++){
+                int sum = ans.get(j-1) + ans.get(j);
+                helper.add(sum);
+            }
+            
+            if(i!=1) helper.add(1);
+                 
+            ans = helper;
+
+            
+            helper = new ArrayList<>();
+        }
+        
+        return ans;
     }
 }
