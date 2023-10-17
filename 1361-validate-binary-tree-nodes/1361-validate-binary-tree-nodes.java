@@ -1,66 +1,42 @@
 class Solution {
-    public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
-         HashMap<Integer, List<Integer>> graph = new HashMap<>();
-        
-        int[] indegree = new int[n];
-        
-        for(int i=0; i<n; i++)
-            graph.put(i, new ArrayList<>());
-        
-        for(int i=0; i<n; i++){
-            if(leftChild[i] != -1){
-                graph.get(i).add(leftChild[i]);
-                indegree[leftChild[i]]++;
-            }
-            
-            if(rightChild[i] != -1){
-                graph.get(i).add(rightChild[i]);
-                indegree[rightChild[i]]++;
-            }
-            
-            if(graph.get(i).size() > 2)
-                return false;
+    public boolean validateBinaryTreeNodes(int n, int[] left, int[] right) {
+     int[] parent = new int[n];
+        for(int i = 0; i < n; i++) {
+            parent[i] = i; //every node is parent of itselt
         }
-        
-        int components = 0;
-        
-        for(int i: indegree){
-            if(i == 0){
-                components++;
-                
-                if(components > 1)
-                    return false;
+        for(int i = 0; i < n; i++) {
+            int l = left[i];
+            int r = right[i];
+            int x = find(parent, i);
+            if(l != -1) {
+                int root = find(parent, l);
+                if(root == x) return false; // left node already has a parent
+                union(parent, i, l);
             }
-            if(i > 1)
-                return false;
+            if(r != -1) {
+                int root = find(parent, r); 
+                if(root == x) return false; // right node already has a parent
+                union(parent, i, r);
+            }
         }
-        
-        int[] visited = new int[n];
-        
-        for(int i=0; i<n; i++){
-            if(visited[i] == 0){
-                if(isCyclic(graph, i, visited))
-                    return false;
-            }
+        int root = find(parent, 0);
+        for(int i = 1; i < n; i++) {
+            int rootI = find(parent, i);
+            if(root != rootI) return false; //Root of all node should be same - note the path compression
         }
         return true;
     }
     
-    public boolean isCyclic(HashMap<Integer, List<Integer>> graph, int src, int[] visited){
-        if(visited[src] == 2)
-            return true;
-        
-        visited[src] = 2;
-        
-        for(int i: graph.get(src)){
-            if(visited[i] != 1){
-                if(isCyclic(graph, i, visited))
-                    return true;
-            }
+    void union(int[] parent, int x, int y) {
+        parent[y] = x;
+    }
+    
+    int find(int[] parent, int x) {
+        if(parent[x] != x) {
+		    //Path compression for faster parent search - this makes Tree root as parent of all nodes
+            parent[x] = find(parent, parent[x]); 
+            return parent[x];
         }
-        
-        visited[src] = 1;
-        
-        return false;
+        return x;
     }
 }
