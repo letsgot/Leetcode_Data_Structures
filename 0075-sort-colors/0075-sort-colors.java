@@ -3,25 +3,26 @@ class Solution {
         int i = 0;
         int j = 0;
         int k = nums.length-1;
-
-       while(i<=k){
-            int num = nums[i];
-            if(num==2){
-                int temp = nums[i];
-                nums[i] = nums[k];
-                nums[k] = temp;
-                k--;
-            }
-            else if(num==1){
-                i++;
-            }
-            else{
-                int temp = nums[i];
-                nums[i] = nums[j];
-                nums[j] = temp;
+        
+        while(i<=k){
+            if(nums[i]==0){
+                swap(nums,i,j);
                 i++;
                 j++;
             }
+            else if(nums[i]==1){
+                i++;
+            }
+            else{
+                swap(nums,i,k);
+                k--;
+            }
         }
+    }
+    
+    public void swap(int [] nums,int i,int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
