@@ -42,4 +42,17 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0287-find-the-duplicate-number](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0287-find-the-duplicate-number) |
+| [0672-bulb-switcher-ii](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0672-bulb-switcher-ii) |
+## Math
+|  |
+| ------- |
+| [0672-bulb-switcher-ii](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0672-bulb-switcher-ii) |
+## Depth-First Search
+|  |
+| ------- |
+| [0672-bulb-switcher-ii](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0672-bulb-switcher-ii) |
+## Breadth-First Search
+|  |
+| ------- |
+| [0672-bulb-switcher-ii](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0672-bulb-switcher-ii) |
 <!---LeetCode Topics End-->
