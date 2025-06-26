@@ -6,6 +6,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Array
 |  |
 | ------- |
+| [0287-find-the-duplicate-number](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0287-find-the-duplicate-number) |
 | [1620-check-if-array-pairs-are-divisible-by-k](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/1620-check-if-array-pairs-are-divisible-by-k) |
 | [2465-shifting-letters-ii](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/2465-shifting-letters-ii) |
 ## Hash Table
@@ -29,4 +30,16 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1058-lexicographically-smallest-equivalent-string](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/1058-lexicographically-smallest-equivalent-string) |
+## Two Pointers
+|  |
+| ------- |
+| [0287-find-the-duplicate-number](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0287-find-the-duplicate-number) |
+## Binary Search
+|  |
+| ------- |
+| [0287-find-the-duplicate-number](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0287-find-the-duplicate-number) |
+## Bit Manipulation
+|  |
+| ------- |
+| [0287-find-the-duplicate-number](https://github.com/letsgot/Leetcode_Data_Structures/tree/master/0287-find-the-duplicate-number) |
 <!---LeetCode Topics End-->
